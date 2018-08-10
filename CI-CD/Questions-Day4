@@ -1,0 +1,23 @@
+ 1.What is a fast-forward merge? When do you get a fast-forward merge in git?
+    When we directly merge our master with latest branch is known as fast-forward merge.
+    when a branch's latest commit is ahead of master and also not diverged from master, then fast-forward merge will occur.
+    
+ 2. What is a branch and why do you create a branch?
+  A branch in Git is simply a lightweight movable pointer to one of these commits. The default branch name in Git is master.
+  we create a branch when we want to do a parallel development at a same product. 
+  
+ 3. Which of the following commands is used to create a branch in git?
+    git checkout -b branchname
+    
+ 4. Which of the following statements is true.
+ a. Github is a web-based hosting service for git repositories.
+ c. Git is an distributed,opensource version control tool
+ 
+ 
+ 6. What is a merge conflict and when does a merge conflict arise?
+      when a problem occurs during a merge of branch and master is known as merge coflict.
+      A merge conflict happens when two branches both modify the same region of a file and are subsequently merged. Git can't know which of the changes to keep, and thus needs human intervention to resolve the conflict.
+ 9. Which command helps you to view the list of commits made in the git repository? 
+     git log
+     
+     
