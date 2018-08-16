@@ -18,4 +18,37 @@ sqlite> select title from movie where mid not in (select distinct(mid) from rati
 Star Wars
 Titanic
 
+4.Some reviewers didn't provide a date with their rating. Find the names of all reviewers who have ratings with a NULL value for the date 
+
+sqlite> select r.name from reviewer r join rating rt on r.rid=rt.rid and rt.ratingdate is null;
+Daniel Lewis
+Chris Jackson
+
+5.Write a query to return the ratings data in a more readable format: reviewer name, movie title, stars, and ratingDate. Also, sort the data, first by reviewer name, then by movie title, and lastly by number of stars?
+
+sqlite> select r.name,m.title,rt.stars,rt.ratingdate from rating rt
+   ...> join reviewer r on r.rid=rt.rid
+   ...> join movie m on m.mid=rt.mid
+   ...> order by r.name asc,m.title asc,rt.stars desc;
+Ashley White|E.T.|3|2011-01-02
+Brittany Harris|Raiders of the Lost Ark|4|2011-01-12
+Brittany Harris|Raiders of the Lost Ark|2|2011-01-30
+Brittany Harris|The Sound of Music|2|2011-01-20
+Chris Jackson|E.T.|2|2011-01-22
+Chris Jackson|Raiders of the Lost Ark|4|
+Chris Jackson|The Sound of Music|3|2011-01-27
+Daniel Lewis|Snow White|4|
+Elizabeth Thomas|Avatar|3|2011-01-15
+Elizabeth Thomas|Snow White|5|2011-01-19
+James Cameron|Avatar|5|2011-01-20
+Mike Anderson|Gone with the Wind|3|2011-01-09
+Sarah Martinez|Gone with the Wind|4|2011-01-27
+Sarah Martinez|Gone with the Wind|2|2011-01-22
+
+6.For all cases where the same reviewer rated the same movie twice and gave it a higher rating the second time, return the reviewer's name and the title of the movie?
+
+
+
+
+
 
