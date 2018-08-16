@@ -1,0 +1,21 @@
+1.Find the titles of all movies directed by Steven Spielberg?
+    sqlite>  select title from movie where director like 'Steven Spielberg';
+E.T
+Raiders of the Lost Ark
+    
+2.Find all years that have a movie that received a rating of 4 or 5, and sort them in increasing order?
+ 
+ sqlite> select m.year,m.title from movie m join rating r on m.mid=r.mid and r.stars >=4 order by m.year asc;
+2009|Avatar
+2009|Avatar
+2009|Avatar
+2009|Avatar
+2009|Avatar
+2009|Avatar
+
+3.Find the titles of all movies that have no ratings?
+sqlite> select title from movie where mid not in (select distinct(mid) from rating);
+Star Wars
+Titanic
+
+
