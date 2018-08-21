@@ -16,3 +16,14 @@ sqlite> select name1,grade1,name2,grade2 from (
    ...> join highschooler h2 on l.id2=h2.id)
    ...> where difference >=2;
 John|12|Haley|10
+
+3.For every pair of students who both like each other, return the name and grade of both students. Include each pair only once, with the two names in alphabetical order.
+
+sqlite> select h1.name,h1.grade,h2.name,h2.grade from highschooler h1
+   ...> join likes l1 on l1.id1=h1.id
+   ...> join highschooler h2 on l1.id2=h2.id
+   ...> join likes l2 on l1.id1=l2.id2 and l1.id2=l2.id1 and l1.id1>l1.id2 order by h1.name,h2.name;
+   
+   4.Find all students who do not appear in the Likes table (as a student who likes or is liked) and return their names and grades. Sort by grade, then by name within each grade.
+   
+   
