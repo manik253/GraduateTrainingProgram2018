@@ -66,6 +66,51 @@ John|12|Logan|12
 sqlite> select count(*)-(select count(distinct(name)) from highschooler) from highschooler;
 2
 
+9.Find the name and grade of all students who are liked by more than one other student.
 
- 
+sqlite> select h1.name,h1.grade from highschooler h1
+   ...> join likes l on l.id2=h1.id  group by l.id2 having count(l.id2)>=2
+   ...> ;
+Kris|10
+Cassandra|9
+
+10.For every situation where student A likes student B, but student B likes a different student C, return the names and grades of A, B, and C.
+sqlite> select h1.name,h1.grade,h2.name,h2.grade,h3.name,h3.grade from highschooler h1
+   ...> join likes l on l.id1=h1.id
+   ...> join highschooler h2 on l.id2=h2.id
+   ...> join likes l2 on l2.id1=l.id2 and l2.id2<>l.id1
+   ...> join highschooler h3 on h3.id=l2.id2;
+Andrew|10|Cassandra|9|Gabriel|9
+Gabriel|11|Alexis|11|Kris|10
+
+11.Find those students for whom all of their friends are in different grades from themselves. Return the students' names and grades.
+
+sqlite> select h1.name,h1.grade,h2.name,h2.grade from highschooler h1
+   ...> join friend f on h1.id=f.id1
+   ...> join highschooler h2 on h2.id=f.id2 and h1.grade<>h2.grade;
+Gabriel|9|Andrew|10
+Tiffany|9|Alexis|11
+Cassandra|9|Alexis|11
+Andrew|10|Jordan|12
+Andrew|10|Austin|11
+Andrew|10|Gabriel|9
+Alexis|11|Tiffany|9
+Alexis|11|Cassandra|9
+Austin|11|Andrew|10
+Austin|11|Kyle|12
+Jessica|11|Kyle|12
+Jordan|12|Andrew|10
+Kyle|12|Austin|11
+Kyle|12|Jessica|11
+
+12.What is the average number of friends per student?
+
+sqlite> select avg(cout) from (select count(id1) as cout from friend group by id1);
+2.5
+
+13.Find the number of students who are either friends with Cassandra or are friends of friends of Cassandra. Do not count Cassandra, even though technically she is a friend of a friend.
+
+
+
+
    
