@@ -1,0 +1,9 @@
+1.Give the organiser's name of the concert in the Assembly Rooms after the first of Feb, 1997.
+
+sqlite> select m.m_name from musician m
+   ...> join concert c on c.concert_orgniser=m.m_no where c.con_date > 02/01/1997 and c.concert_venue='Assembly Rooms';
+James Steeple
+
+
+2.Find all the performers who played guitar or violin and were born in England. 
+
