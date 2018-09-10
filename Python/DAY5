@@ -1,0 +1,69 @@
+import sqlite3
+
+class database:
+	def create(self,c):
+		c.execute('CREATE TABLE if not exists student1 (Name varchar(30),Rollno varchar(30),Subject1 integer,Subject2 integer,Subject3 integer)')
+	def insert(self,values,c):
+		c.executemany('INSERT INTO student1 VALUES (?,?,?,?,?)', values)
+	def count(self,c):
+		c.execute('SELECT count(*) FROM student1')
+		print("Count= ",c.fetchone())
+	def display(self,c):
+		for row in c.execute('SELECT * FROM student1'):
+			print row
+	def update(self,mark,name):
+		c.execute("update student1 set subject3=%s where Name='%s'"%(mark,name))
+		print("Record Updated")
+	def delete(self,c):
+		c.execute("delete from student1")
+		print("Table deleted")
+	def drop(self,c):
+		c.execute("drop table student1")
+		print("Table Dropped")
+	
+		
+	
+		
+		
+
+
+conn = sqlite3.connect('example.db')
+c = conn.cursor()
+obj=database()
+# Create table
+obj.create(c)
+
+# Insert a row of data
+values= [('Manikandan','15mca023',100,100,98),
+             ('Kali','15mca024',90,80,98),
+             ('Arun','15mca024',90,80,98),
+			 ('Karthi','15mca026',87,70,98),
+			 ('Dinesh','15mca028',40,100,98)
+             ]
+
+obj.insert(values,c)
+
+# Save (commit) the changes
+conn.commit()
+
+# count the number of rows
+
+obj.count(c)
+
+print("\nBefore Update:\n\n")
+
+obj.display(c)
+
+obj.update(100,'Manikandan')
+
+print("\nAfter Update:\n\n")
+
+obj.display(c)
+
+obj.delete(c)
+
+obj.drop(c)
+
+# We can also close the connection if we are done with it.
+# Just be sure any changes have been committed or they will be lost.
+conn.close()
