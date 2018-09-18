@@ -163,8 +163,23 @@ James Cameron|Titanic
 Steven Spielberg|E.T.
 Steven Spielberg|Raiders of the Lost Ark
 
-19.Find the movie(s) with the highest average rating. Return the movie title(s) and average rating. (Hint: This query is more difficult to write in SQLite than other systems; you might think of it as finding the highest average rating and then choosing the movie(s) with that average rating.)
+19.Find the movie(s) with the highest average rating. Return the movie title(s) and average rating.
+ (Hint: This query is more difficult to write in SQLite than other systems; you might think of it as finding the highest average rating and then choosing the movie(s) with that average rating.) 
 
+select MID,title,max(star) from(select title,rate.mId as MID,avg(stars) as star from Movie mov inner join Rating rate on mov.mId=rate.mId group by rate.mId);
+
+
+20.Find the movie(s) with the lowest average rating. Return the movie title(s) and average rating. 
+(Hint: This query may be more difficult to write in SQLite than other systems;
+ you might think of it as finding the lowest average rating and then choosing the movie(s) with that average rating.) 
+
+select MID,title,min(star) from(select title,rate.mId as MID,avg(stars) as star from Movie mov inner join Rating rate on mov.mId=rate.mId group by rate.mId);
+
+
+21.For each director, return the director's name together with the title(s) of the movie(s) they directed that received the highest rating among all of their movies, and the value of that rating.
+Ignore movies whose director is NULL. (1 point possible)
+
+select director,title,max(stars) from Movie m inner join Rating r on m.mId=r.mId and director is NOT NULL group by r.mId;
 
 
 
